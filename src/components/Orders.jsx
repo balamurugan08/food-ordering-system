@@ -4,6 +4,13 @@ import Menu from '../components/Menu'
 // import data from '../data/data.json'
 import MyCart from '../components/MyCart'
 import axios from "axios";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+
 
 const eventBaseUrl = "http://localhost:8080/foodApp/restaurant";
 class Orders extends React.Component {
@@ -16,9 +23,10 @@ class Orders extends React.Component {
             price:'',
             name:[],
             total:0,
-            quantity:0,
+            quantity:1,
             clickable: false,
-            cartList:[]
+            cartList:[],
+            open:false
             // restaurantName:this.props.history.location.pathname.slice(9)
         };
     }
@@ -41,50 +49,84 @@ class Orders extends React.Component {
     })
     }
 
-    childHandler = (ChildPrice,ChildName,ChildQuantity) => {
-        const names = this.state.name; 
-        names.push(ChildName);
-        let totalPrice = this.state.total + ChildPrice*(ChildQuantity+1)
-        this.setState(
-            {price: ChildPrice,
-            name: names,
-            quantity : ChildQuantity+1,
-            clickable: true,
-            total:totalPrice }
-        )};
-
-    incrementQuantity = (incQuan) => {
-        this.setState(
-            {
-                quantity: incQuan+1
-                
-            }
-        )
+    childHandler = (item) => {
+        console.log('item',item)
+        let cartListDetails = this.state.cartList;
+        let quantity = 1;
+        item.quantity = quantity;
+        cartListDetails.push(item);
+        this.setState({
+            cardList:cartListDetails
+        })
+        this.state.cartList.map(item=>{
+          let totalPrice = item.price * item.quantity + this.state.total
+          this.setState({
+              total:totalPrice
+          })
+        })
     };
 
-    decrementQuantity = (decQuan) => {
-        if(this.state.quantity>=1){
-            this.setState(
-                {
-                    quantity: decQuan-1
-                    
-                }
-            )
-        }
-        
+    incrementQuantity = (productId) => {
+        this.state.cartList.map(item=>{
+            if(item.id==productId){
+                item.quantity =  item.quantity+1;
+                let totalPrice = item.price  + this.state.total
+                this.setState({
+                    total:totalPrice
+                })
+            }
+        })
+       this.setState({
+           cartList:this.state.cartList
+       })
+          
     };
 
-    total = (p,q) => {
-        this.setState(
-            {
-                total:p*q
+    decrementQuantity = (productId) => {
+         this.state.cartList.map(item=>{
+            if(item.id==productId){
+                item.quantity =  item.quantity-1;
+                let totalPrice = this.state.total - item.price
+                this.setState({
+                    total:totalPrice
+                })
             }
-        )
+        })
+        this.setState({
+            cartList:this.state.cartList
+        })
+    };
+
+    handlePayment = ()=>{
+        this.setState({
+            open:true
+        })
     }
+
+    handleClose = ()=>{
+        const {
+            history: { push },
+          } = this.props;
+        this.setState({
+            open:false
+        })
+        push({
+            pathname: "/home",
+          });
+    }
+
+    handleLogout = () => {
+        localStorage.removeItem("username");
+        const {
+          history: { push },
+        } = this.props;
+        push("/");
+      };
    
 
     render(){
         let value = this.props.history.location.pathname.split('/');
+        let isDisplayPayment = this.state.total>0;
         
         return(
         <div>
@@ -98,13 +140,19 @@ class Orders extends React.Component {
                 
             </div> */}
 
-            <div className="flex justify-between items-center mb-4">
-          <h2 className="text-4xl font-semibold text-blue-800">
+            <div className="flex items-center mb-4">
+          <h2 style={{flexGrow:'1'}}className="flex 1 text-4xl font-semibold text-blue-800">
             Food Ordering System
           </h2>
           <button
-            class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
-            // onClick={this.handleLogout}
+            class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+            onClick={this.handleClose}
+          >
+            Home
+          </button>
+          <button
+            class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+            onClick={this.handleLogout}
           >
             Logout
           </button>
@@ -118,7 +166,7 @@ class Orders extends React.Component {
                         <br/>
                         <div className='menuDetails'>
                         {this.state.newList.map (
-                        item => <Menu id = {item.id} price={item.price} name={item.productName} action={this.childHandler} />) }
+                        item => <Menu id = {item.id} price={item.price} name={item.productName} action={(e)=>this.childHandler(item)} />) }
                         </div>
                     </div>
                 </div>
@@ -129,17 +177,25 @@ class Orders extends React.Component {
                         <div id= "right-in">
                             <h4 style={{fontWeight: 700}}>Your Cart</h4>
                                 
-                            { this.state.clickable && 
+                            {/* { this.state.clickable &&  */}
+                           
                                 <div>
-                                    <MyCart 
-                                        name={this.state.name}
-                                        price={this.state.price}
-                                        quantity={this.state.quantity} 
-                                        increment={this.incrementQuantity} 
-                                        decrement={this.decrementQuantity}>
-                                    </MyCart>
+                               {this.state.cardList && this.state.cardList.map(product=>
+                            //    {product.quantity === 1 &&
+                                 <MyCart 
+                                 name={product.productName}
+                                 price={product.price}
+                                 quantity={product.quantity} id = {product.id}
+                                 increment={this.incrementQuantity} 
+                                 decrement={this.decrementQuantity}
+                                >
+                             </MyCart>
+                            //  }
+                             
+                             )}
+                                   
                                 </div>
-                            }
+                            {/* } */}
     
                             <div id="total">
                                 <p id="total"> Total amount: 
@@ -149,7 +205,29 @@ class Orders extends React.Component {
                                 onClick = {() => this.total(this.state.price,this.state.quantity)} /> */}
                                 <br/>
                                 <div style={{display:'flex',justifyContent:'center'}}>
-                                <input id="pay" type="button" value="Pay Now"/>
+                               { isDisplayPayment &&
+                                <input  id="pay" type="button" value="Pay Now" onClick={this.handlePayment}/>}
+                               
+      <Dialog
+        open={this.state.open}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Order Confirmation"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          Thanks For Your Order. We will reach you soon with your delicious food.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
                                 </div>
                                 
                             </div>

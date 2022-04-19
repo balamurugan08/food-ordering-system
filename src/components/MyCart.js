@@ -4,15 +4,14 @@ class MyCart extends React.Component{
     render(){
         return(
             <div>
-                {this.props.name.map((name,number) => (
-                    <p key={number} id="pitem"> 
-                        {name}
+                
+                    <p  id="pitem"> 
+                        {this.props.name}
                     <br/><br/>
-                    <input className="ip" style={{cursor:'pointer'}} type="button" value="-" onClick={()=>this.props.decrement(this.props.quantity)}/>
+                    <input disabled={ this.props.quantity===0} className="ip" style={{cursor:'pointer'}} type="button" value="-" onClick={()=>this.props.decrement(this.props.id)}/>
                     <input className="ip" id="tx-w" type="text" value={this.props.quantity}/>
-                    <input className="ip" style={{cursor:'pointer'}} type="button" value="+" onClick={()=>this.props.increment(this.props.quantity)}/>
+                    <input className="ip" style={{cursor:'pointer'}} type="button" value="+" onClick={()=>this.props.increment(this.props.id)}/>
                     </p>
-                ))}   
             </div>
         )
     }

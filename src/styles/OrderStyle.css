@@ -139,7 +139,8 @@ body{
     color: darkslategray;
     padding-bottom: 20px;
     border-bottom: 1px solid gray;
-    font-size: 15px                
+    font-size: 15px;
+	font-weight: 600;                
 }
  .ip{
     height: 30px;
