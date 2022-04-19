@@ -10,7 +10,7 @@ class RestaurantCard extends React.Component{
         return(
             <div className="cart">
                 <Link to={{
-                    pathname:`/order/${this.props.id}/${this.props.name}`}}>
+                    pathname:`/order/${this.props.id}/${this.props.name}/${this.props.isAdmin}`}}>
                     <center><img src={this.props.thumbnail_image} alt={this.props.name}/></center>
                 </Link>
                     <h3 id="hotel-title">{this.props.name}</h3>

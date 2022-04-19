@@ -10,6 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import FormDialog from './FormDialog';
 
 
 const eventBaseUrl = "http://localhost:8080/foodApp/restaurant";
@@ -26,7 +27,8 @@ class Orders extends React.Component {
             quantity:1,
             clickable: false,
             cartList:[],
-            open:false
+            open:false,
+            openProductDialog:false
             // restaurantName:this.props.history.location.pathname.slice(9)
         };
     }
@@ -122,6 +124,18 @@ class Orders extends React.Component {
         } = this.props;
         push("/");
       };
+
+
+      openProductDialog = () =>{
+        this.setState({
+            openProductDialog:true
+        })
+    }
+      closeProductDialog = () =>{
+        this.setState({
+            openProductDialog:false
+        })
+      }
    
 
     render(){
@@ -161,7 +175,12 @@ class Orders extends React.Component {
 
             <div id="content">
                 <div id="head">
+                    <div class="flex justify-between">
                     <h1 className='hname'>{value[3]}</h1>
+                    {this.props.match.params.isAdmin === "true" && <button
+            class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+            onClick={this.openProductDialog}>Add Products</button>}
+                    </div>
                     <div id='items'>
                         <br/>
                         <div className='menuDetails'>
@@ -228,6 +247,7 @@ class Orders extends React.Component {
           </Button>
         </DialogActions>
       </Dialog>
+      <FormDialog open={this.state.openProductDialog} handleClose={this.closeProductDialog} restaurantId={this.state.id}/>
                                 </div>
                                 
                             </div>

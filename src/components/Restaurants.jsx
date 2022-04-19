@@ -4,6 +4,7 @@ import '../styles/RestaurantStyle.css'
 import data from '../data/data.json'
 import RestaurantCard from '../components/RestaurantCard'
 import axios from "axios";
+import FormDialog from './FormDialog';
 
 const eventBaseUrl = "http://localhost:8080/foodApp/restaurant";
 class Restaurants extends React.Component {
@@ -11,7 +12,8 @@ class Restaurants extends React.Component {
         super();
         this.state={
             // list: data
-            list:[]
+            list:[],
+            openRestaurantDialog:false
         };
     }
 
@@ -44,6 +46,18 @@ class Restaurants extends React.Component {
             
         }
         
+    }
+
+    openRestaurantDialog = () =>{
+        this.setState({
+            openRestaurantDialog:true
+        })
+    }
+
+    closeRestaurantDialog = () =>{
+        this.setState({
+            openRestaurantDialog:false
+        })
     }
 
     componentWillMount(){
@@ -84,12 +98,18 @@ class Restaurants extends React.Component {
                     </select>
                 </p>
             </div>
+            {this.props.isAdmin && <div className="self-end"><button
+            class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+            onClick={this.openRestaurantDialog}>Add Restaurant</button></div>}
+            <FormDialog open={this.state.openRestaurantDialog} handleClose={this.closeRestaurantDialog} isRestaurant/>
+            <div className="flex flex-wrap">
             {this.state.list && this.state.list.map(
                 x => 
-                    <RestaurantCard thumbnail_image={x.image} name = {x.restaurantName} id={x.id}/>
+                    <RestaurantCard thumbnail_image={x.image} name = {x.restaurantName} id={x.id} isAdmin={this.props.isAdmin ? true : false}/>
                     // cuisines = {x.cuisines} rating = {x.rating} reviews = {x.reviews}/>
                     
             )}
+            </div>
 
         
             

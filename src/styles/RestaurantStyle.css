@@ -8,8 +8,7 @@
 	/* margin-top: 10px;	
 	margin-left: 10px; */
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
+	flex-direction: column;
 	background-color:aliceblue;
 }
 
