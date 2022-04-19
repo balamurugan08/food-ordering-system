@@ -6,7 +6,7 @@ import Alert from "@mui/material/Alert";
 import { withRouter } from "react-router";
 import axios from "axios";
 
-const eventBaseUrl = "http://52.0.123.213:8080/user/register";
+const eventBaseUrl = "http://localhost:8080/foodApp/user";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -16,11 +16,13 @@ class Signup extends React.Component {
       email: "",
       phoneNumber: "",
       password: "",
+      address:"",
       shouldAlertDisplay: false,
       shouldErrorMessageDisplay: false,
       signupErrorMessage:"",
       isEmailError:false,
-      isNumberError:false
+      isNumberError:false,
+
 
     };
   }
@@ -41,8 +43,12 @@ class Signup extends React.Component {
     this.setState({ password: e.target.value });
   };
 
+  handleAddressChange = (e) => {
+    this.setState({ address: e.target.value });
+  };
+
   handleSubmit = () => {
-    const { username, email, phoneNumber, password } = this.state;
+    const { username, email, phoneNumber, password,address } = this.state;
     const {
       history: { push },
     } = this.props;
@@ -50,7 +56,7 @@ class Signup extends React.Component {
       username === "" ||
       email === "" ||
       phoneNumber === "" ||
-      password === ""
+      password === "" || address=== ""
     ) {
       this.setState({ shouldAlertDisplay: true });
       return;
@@ -73,10 +79,11 @@ class Signup extends React.Component {
     }
 
     const reqJson={
-     username:username,
+     userName:username,
      password:password,
-      email:email,
-       phone:phoneNumber
+     email:email,
+     phone:phoneNumber,
+     addressName: address
     }
    
     axios.post(eventBaseUrl,reqJson).then((res) => {
@@ -105,7 +112,7 @@ class Signup extends React.Component {
 
 
   render() {
-    const { username, email, phoneNumber, password, shouldAlertDisplay,shouldErrorMessageDisplay,signupErrorMessage, isEmailError,isNumberError} =
+    const { username,address, email, phoneNumber, password, shouldAlertDisplay,shouldErrorMessageDisplay,signupErrorMessage, isEmailError,isNumberError} =
       this.state;
       
     return (
@@ -118,6 +125,14 @@ class Signup extends React.Component {
           label="Username"
           autoComplete="off"
           onChange={(e) => this.handleUsernameChange(e)}
+        />
+        <TextField
+          value={password}
+          required
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          onChange={(e) => this.handlePasswordChange(e)}
         />
         <TextField
           error={isEmailError}
@@ -138,13 +153,13 @@ class Signup extends React.Component {
           helperText={isNumberError?"Invalid Phone Number":''}
         />
         <TextField
-          value={password}
           required
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          onChange={(e) => this.handlePasswordChange(e)}
+          id="outlined-phone"
+          value={address}
+          label="Address"
+          onChange={(e) => this.handleAddressChange(e)}
         />
+        
         <div className="flex items-center justify-between">
           <Button variant="contained" onClick={this.handleSubmit}>
             Submit

@@ -6,7 +6,7 @@ import Alert from "@mui/material/Alert";
 import { withRouter } from "react-router";
 import axios from "axios";
 
-const eventBaseUrl = "http://52.0.123.213:8080/user/login";
+const eventBaseUrl = "http://localhost:8080/foodApp/user/login";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -41,16 +41,16 @@ class Login extends React.Component {
       username:username,password:password
     }
     axios.post(eventBaseUrl,reqJson).then((res) => {
-     if(res.data.loginStatus)
+     if(res.data.isValidUser)
      {
-       localStorage.setItem("username",username)
-       localStorage.setItem("userId",res.data.userId)
+      //  localStorage.setItem("username",username)
+      //  localStorage.setItem("userId",res.data.userId)
       push({
         pathname: "/home",
         username: username, 
       });
      }
-     if(!res.data.loginStatus){
+     if(!res.data.isValidUser){
        this.setState({shouldLoginErrorDisplay: true})
      }
     });
@@ -62,15 +62,7 @@ class Login extends React.Component {
       <div className="flex flex-col space-y-5 max-w-md mx-auto my-16 min-w-500">
         <div className="flex items-center justify-between">
           <h2 className="text-4xl font-semibold text-blue-800">Login</h2>
-          <div className="flex">
-            <p className="text-lg">New User?</p>
-            <Link
-              to="/signup"
-              className="text-blue-500 font-semibold text-lg px-1"
-            >
-              Sign up
-            </Link>
-          </div>
+          
         </div>
         <TextField
           value={username}
@@ -87,6 +79,15 @@ class Login extends React.Component {
           value={password}
           onChange={(e) => this.handlePasswordChange(e)}
         />
+        <div className="flex">
+            <p className="text-lg">New User?</p>
+            <Link
+              to="/signup"
+              className="text-blue-500 font-semibold text-lg px-1"
+            >
+              Sign up
+            </Link>
+          </div>
         <Button  style={{borderRadius:'16px'}} variant="contained" onClick={this.handleLogin}>
           Login
         </Button>

@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
+import Restaurants from "./Restaurants";
 
 class Main extends React.Component {
   constructor(props) {
@@ -8,12 +9,12 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
-    if (localStorage.getItem("username") === null) {
-      const {
-        history: { push },
-      } = this.props;
-      push("/");
-    }
+    // if (localStorage.getItem("username") === null) {
+    //   const {
+    //     history: { push },
+    //   } = this.props;
+    //   push("/");
+    // }
   }
 
   handleLogout = () => {
@@ -37,7 +38,9 @@ class Main extends React.Component {
           >
             Logout
           </button>
+        
         </div>
+        <Restaurants/>
       </div>
     );
   }
