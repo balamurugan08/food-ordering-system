@@ -102,7 +102,7 @@ class Restaurants extends React.Component {
             class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
             onClick={this.openRestaurantDialog}>Add Restaurant</button></div>}
             <FormDialog open={this.state.openRestaurantDialog} handleClose={this.closeRestaurantDialog} isRestaurant/>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap ml-8">
             {this.state.list && this.state.list.map(
                 x => 
                     <RestaurantCard thumbnail_image={x.image} name = {x.restaurantName} id={x.id} isAdmin={this.props.isAdmin ? true : false}/>

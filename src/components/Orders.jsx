@@ -141,6 +141,7 @@ class Orders extends React.Component {
     render(){
         let value = this.props.history.location.pathname.split('/');
         let isDisplayPayment = this.state.total>0;
+        const isAdmin = this.props.match.params.isAdmin === "true" ? true : false;
         
         return(
         <div>
@@ -174,10 +175,10 @@ class Orders extends React.Component {
         </div>
 
             <div id="content">
-                <div id="head">
+                <div id="head" style={isAdmin ? {width: '100%'} : {width:'75%'}}>
                     <div class="flex justify-between">
                     <h1 className='hname'>{value[3]}</h1>
-                    {this.props.match.params.isAdmin === "true" && <button
+                    {isAdmin && <button
             class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
             onClick={this.openProductDialog}>Add Products</button>}
                     </div>
@@ -189,7 +190,7 @@ class Orders extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div id="panel">
+                {!isAdmin && <div id="panel">
                     <div id="logo">               
                     </div> 
                     <div id="right">
@@ -253,7 +254,7 @@ class Orders extends React.Component {
                             </div>
                         </div>                
                     </div>
-                </div>
+                </div>}
 
             </div>
         </div>

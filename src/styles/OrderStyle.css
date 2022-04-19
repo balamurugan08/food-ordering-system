@@ -50,7 +50,6 @@ body{
 
 #head{
 	height: 10vh;
-	width: 75%;
 	background-color:darkslategray;
 	padding-top: 20px;
 	padding-left:20px;
@@ -82,11 +81,7 @@ body{
 }
 
 #items {
-	margin-top: 55px;
-	padding-left: 70px;
-	margin-right: 100px;
-	height: 450%;
-
+	margin-top: 36px;
 }
 
 #items p{
@@ -171,14 +166,14 @@ body{
 
 @media screen and (min-width:501px) and (max-width:1100px){
 	.menuCard{
-	  width: 420px !important;
+	  width: 320px !important;
 	}
   }
 
   .menuCard{
 	box-shadow: -2px 2.5px 5.8px #5a5757;
 	border-radius: 10px;
-	width: 400px;
+	width: 300px;
 	height: 110px;
 	margin: 15px;
 	border: 1px solid #f7f4f4;
@@ -212,7 +207,6 @@ body{
   .menuDetails{
 	display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
   }
 
   .h5{
