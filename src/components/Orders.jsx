@@ -28,7 +28,8 @@ class Orders extends React.Component {
             clickable: false,
             cartList:[],
             open:false,
-            openProductDialog:false
+            openProductDialog:false,
+            isAdmin:false,
             // restaurantName:this.props.history.location.pathname.slice(9)
         };
     }
@@ -43,10 +44,12 @@ class Orders extends React.Component {
         let value = this.props.history.location.pathname.split('/');
         const restaurantId = value[2]
         let url = eventBaseUrl + '/'+restaurantId + '/products';
+        const isAdmin = this.props.match.params.isAdmin === "true" ? true : false;
         axios.get(url).then((res) => {
             this.setState({
                 id:restaurantId,
-                newList:res.data.products
+                newList:res.data.products,
+                isAdmin:isAdmin
             })
     })
     }
@@ -112,9 +115,17 @@ class Orders extends React.Component {
         this.setState({
             open:false
         })
-        push({
-            pathname: "/home",
-          });
+
+        if(this.state.isAdmin){
+            push({
+                pathname: "/admin",
+              });
+
+        }else{
+            push({
+                pathname: "/home",
+              });
+        }
     }
 
     handleLogout = () => {
@@ -141,8 +152,7 @@ class Orders extends React.Component {
     render(){
         let value = this.props.history.location.pathname.split('/');
         let isDisplayPayment = this.state.total>0;
-        const isAdmin = this.props.match.params.isAdmin === "true" ? true : false;
-        const {openProductDialog,id} = this.state;
+        const {openProductDialog,id,isAdmin} = this.state;
 
         
         return(

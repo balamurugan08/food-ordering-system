@@ -15,15 +15,15 @@ class RestaurantCard extends React.Component{
             //     </Link>
             //         <h3 id="hotel-title">{this.props.name}</h3>
             //         <p>{this.props.cuisines}</p>
-            //         <p>Rating: {'★'.repeat(this.props.rating)}</p>
+            //         <p>Rating: {'★'.repeat(this.props.rating)}</p>s
             //         {/* <p>Reviews: {this.props.reviews}</p> */}
-            // </div>
-            <div class="max-w-xs  bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 mr-4 mt-4 min-w">
+            // </div>200
+            <div class=" bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 mr-4 mt-4 min-w" style={{maxWidth:'200px' , maxHeight:'300px'}}>
     {/* <a href="#"> */}
-        <img class="rounded-t-lg" src={this.props.thumbnail_image} alt="Food Image" />
+        <img class="rounded-t-lg object-cover" src={this.props.thumbnail_image} alt="Food Image" style={{maxWidth:'200px',minHeight:'150px',maxHeight:'150px',minWidth:'200px'}}/>
     {/* </a> */}
     <div class="p-5">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{this.props.name}</h5>
+    <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{this.props.name}</h5>
         {/* <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p> */}
            <Link to={{
                  pathname:`/order/${this.props.id}/${this.props.name}/${this.props.isAdmin}`}}>
