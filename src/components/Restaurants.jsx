@@ -93,8 +93,8 @@ class Restaurants extends React.Component {
                     <select id="sort-metrics" defaultValue={"none"} onChange={(e) => this.sortMenu(e)}>
                         <option value="none" disabled hidden>None</option>
                         <option class="sort-option" value="name">Name</option>
-                        <option class="sort-option" value="rating">Ratings</option>
-                        <option class="sort-option" value="review">Reviews</option>
+                        {/* <option class="sort-option" value="rating">Ratings</option>
+                        <option class="sort-option" value="review">Reviews</option> */}
                     </select>
                 </p>
             </div>
