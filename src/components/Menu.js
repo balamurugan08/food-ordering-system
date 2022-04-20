@@ -28,21 +28,18 @@ class Menu extends React.Component{
 
 
 
-<div className="menuCard d-flex justify-content-between flex-wrap" style={this.props.isAdmin ? {width:'240px'} : {}}>
+        <div className="menuCard d-flex justify-content-between flex-wrap" style={this.props.isAdmin ? {width:'240px'} : {}}>
            <div className="d-flex flex-column itemDescription">
-               <div style={{display:'flex',flexDirection:'column',flexGrow:'1'}}>
+               <div style={{display:'flex',flexDirection:'column',flexGrow:'1',padding:20}}>
                <div className="h5">{this.props.name}</div>
                 <div className="py-2">&#36;{this.props.price}</div>
+                {!this.props.isAdmin && <div style={{display:'flex',alignItems:'center'}}><button className="addCartBtn" onClick={()=>this.props.action()}>Add to cart</button></div>}
                </div>
-               {!this.props.isAdmin && <div style={{display:'flex',alignItems:'center'}}><button className="addCartBtn" onClick={()=>this.props.action()}>Add to cart</button></div>}
-              
-                {/* <button type="button" className="btn btn-outline-warning mt-auto p-2 w-50 addCart" >Add to cart</button> */}
-    </div>
-           {/* <div className="menuCardImg position-relative">
-               
-               <img alt="" className="img-fluid img-rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQVua1higrnAKxEJ8ufI9iIJ8Y3_-DGUBEoA&usqp=CAU"/>
-               <span className="position-absolute top-0 end-0 bg-primary badge" style={{padding:"5px"}}>tag</span>
-           </div> */}
+               <div>
+               <img style={{maxHeight:134,minHeight:134,minWidth:130,maxWidth:130,borderTopRightRadius:10,borderBottomRightRadius:10}}src={this.props.image}/>
+        </div>
+         </div>
+         
        </div>
             
         )

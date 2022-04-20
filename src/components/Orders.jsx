@@ -215,7 +215,7 @@ class Orders extends React.Component {
                         <br/>
                         <div className='menuDetails'>
                         {this.state.newList.map (
-                        item => <Menu id = {item.id} price={item.price} name={item.productName} action={(e)=>this.childHandler(item)} isAdmin={isAdmin}/>) }
+                        item => <Menu id = {item.id} price={item.price} image={item.image} name={item.productName} action={(e)=>this.childHandler(item)} isAdmin={isAdmin}/>) }
                         </div>
                     </div>
                 </div>
