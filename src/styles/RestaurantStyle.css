@@ -13,9 +13,11 @@
 }
 
 #menubar{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
 	height: 70px;
 	width: 100%;
-	background: cornflowerblue;
 	padding-left: 15px;
 	padding-right: 15px;
 }
@@ -32,7 +34,6 @@
 }
 
 #sort {
-	margin-top: 22px;
 	font-size: 18px;
 	display: flex;
 	float: right;

@@ -28,7 +28,7 @@ class Menu extends React.Component{
 
 
 
-<div className="menuCard d-flex justify-content-between flex-wrap">
+<div className="menuCard d-flex justify-content-between flex-wrap" style={this.props.isAdmin ? {width:'240px'} : {}}>
            <div className="d-flex flex-column itemDescription">
                <div style={{display:'flex',flexDirection:'column',flexGrow:'1'}}>
                <div className="h5">{this.props.name}</div>
@@ -36,7 +36,7 @@ class Menu extends React.Component{
                {/* <div>Descriprion</div> */}
                <div className="py-2">&#8377;{this.props.price}</div>
                </div>
-               <div style={{display:'flex',alignItems:'center'}}><button className="addCartBtn" onClick={()=>this.props.action()}>Add to cart</button></div>
+               {!this.props.isAdmin && <div style={{display:'flex',alignItems:'center'}}><button className="addCartBtn" onClick={()=>this.props.action()}>Add to cart</button></div>}
               
                 {/* <button type="button" className="btn btn-outline-warning mt-auto p-2 w-50 addCart" >Add to cart</button> */}
     </div>

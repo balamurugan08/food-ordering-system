@@ -28,7 +28,7 @@ class AdminMain extends React.Component {
   render() {
     return (
       <div className="space-y-5 h-screen flex flex-col">
-        <div className="flex justify-between items-center">
+        {/* <div className="flex justify-between items-center">
           <h2 className="text-4xl font-semibold text-blue-800">
             Food Ordering System
           </h2>
@@ -39,8 +39,8 @@ class AdminMain extends React.Component {
             Logout
           </button>
         
-        </div>
-        <Restaurants isAdmin/>
+        </div> */}
+        <Restaurants isAdmin handleLogout={this.handleLogout}/>
       </div>
     );
   }

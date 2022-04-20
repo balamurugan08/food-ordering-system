@@ -104,7 +104,6 @@ class FormDialog extends React.Component {
          
                            <TextField
                             value={imageUrl}
-                             autoFocus
                              margin="dense"
                              id="imageUrl"
                              label="Image Url"
@@ -116,7 +115,6 @@ class FormDialog extends React.Component {
          
                                     <TextField
                              value={locationName}
-                             autoFocus
                              margin="dense"
                              id="location"
                              label="Location"
@@ -142,7 +140,6 @@ class FormDialog extends React.Component {
    
                      <TextField
                       value={productImageUrl}
-                       autoFocus
                        margin="dense"
                        id="productImage"
                        label="Image Url"
@@ -154,7 +151,6 @@ class FormDialog extends React.Component {
    
                               <TextField
                        value={productPrice}
-                       autoFocus
                        margin="dense"
                        id="price"
                        label="Price"

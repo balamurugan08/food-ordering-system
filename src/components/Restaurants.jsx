@@ -87,8 +87,8 @@ class Restaurants extends React.Component {
             
             <div className="maincart">
 
-            <div id="menubar">
-                <h2 id="menu-title">Choose Your Favourite One</h2>
+            <div id="menubar" className="bg-blue-600">
+                <h2 className="text-4xl font-semibold text-white">Choose Your Favourite One</h2>
                 <p id ="sort">  Sort by &nbsp; &nbsp;
                     <select id="sort-metrics" defaultValue={"none"} onChange={(e) => this.sortMenu(e)}>
                         <option value="none" disabled hidden>None</option>
@@ -98,11 +98,16 @@ class Restaurants extends React.Component {
                     </select>
                 </p>
             </div>
-            {this.props.isAdmin && <div className="self-end"><button
-            class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
-            onClick={this.openRestaurantDialog}>Add Restaurant</button></div>}
+            <div className="self-end">
+            {this.props.isAdmin && <button
+            class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+            onClick={this.openRestaurantDialog}>Add Restaurant</button>}
+            <button
+            class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+            onClick={this.props.handleLogout}>Logout</button>
+            </div>
             <FormDialog open={this.state.openRestaurantDialog} handleClose={this.closeRestaurantDialog} isRestaurant/>
-            <div className="flex flex-wrap ml-8">
+            <div className="flex flex-wrap ml-4">
             {this.state.list && this.state.list.map(
                 x => 
                     <RestaurantCard thumbnail_image={x.image} name = {x.restaurantName} id={x.id} isAdmin={this.props.isAdmin ? true : false}/>

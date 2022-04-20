@@ -50,7 +50,6 @@ body{
 
 #head{
 	height: 10vh;
-	background-color:darkslategray;
 	padding-top: 20px;
 	padding-left:20px;
 
@@ -65,6 +64,7 @@ body{
 	margin-left: 30px;
 	margin-bottom: 7px;
 	font-size: 24px;
+	font-weight: 500;
 }
 
 .aname{

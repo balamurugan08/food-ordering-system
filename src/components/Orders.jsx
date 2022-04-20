@@ -126,7 +126,7 @@ class Orders extends React.Component {
       };
 
 
-      openProductDialog = () =>{
+      handleProductDialog = () =>{
         this.setState({
             openProductDialog:true
         })
@@ -142,9 +142,12 @@ class Orders extends React.Component {
         let value = this.props.history.location.pathname.split('/');
         let isDisplayPayment = this.state.total>0;
         const isAdmin = this.props.match.params.isAdmin === "true" ? true : false;
+        const {openProductDialog,id} = this.state;
+
         
         return(
         <div>
+            <FormDialog open={openProductDialog} handleClose={this.closeProductDialog} restaurantId={id}/>
             {/* <div className="nav">
                 <div id="logo">
                     <h2>FOOD ORDERING SYSTEM</h2>
@@ -155,38 +158,41 @@ class Orders extends React.Component {
                 
             </div> */}
 
-            <div className="flex items-center mb-4">
+            {/* <div className="flex items-center mb-4">
           <h2 style={{flexGrow:'1'}}className="flex 1 text-4xl font-semibold text-blue-800">
             Food Ordering System
           </h2>
-          <button
-            class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+      
+        7
+        </div> */}
+
+            <div id="content">
+                <div id="head" className="bg-blue-700" style={isAdmin ? {width: '100%'} : {width:'75%'}}>
+                    <div class="flex justify-between items-center">
+                    <h1 className='hname'>{value[3]}</h1>
+                <div>   
+                <button
+            class="bg-white text-blue-700 font-bold py-2 px-4 rounded mr-2 mt-2"
             onClick={this.handleClose}
           >
             Home
           </button>
+                    {isAdmin && <button
+            class="bg-white  text-blue-700 font-bold py-2 px-4 rounded mr-2 mt-2"
+            onClick={this.handleProductDialog}>Add Products</button>}
           <button
-            class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+            class="bg-white text-blue-700 font-bold py-2 px-4 rounded mr-2 mt-2"
             onClick={this.handleLogout}
           >
             Logout
           </button>
-        
-        </div>
-
-            <div id="content">
-                <div id="head" style={isAdmin ? {width: '100%'} : {width:'75%'}}>
-                    <div class="flex justify-between">
-                    <h1 className='hname'>{value[3]}</h1>
-                    {isAdmin && <button
-            class="bg-blue-800 hover:bg-blue text-white font-bold py-2 px-4 rounded mr-2 mt-2"
-            onClick={this.openProductDialog}>Add Products</button>}
+          </div> 
                     </div>
                     <div id='items'>
                         <br/>
                         <div className='menuDetails'>
                         {this.state.newList.map (
-                        item => <Menu id = {item.id} price={item.price} name={item.productName} action={(e)=>this.childHandler(item)} />) }
+                        item => <Menu id = {item.id} price={item.price} name={item.productName} action={(e)=>this.childHandler(item)} isAdmin={isAdmin}/>) }
                         </div>
                     </div>
                 </div>
@@ -248,7 +254,7 @@ class Orders extends React.Component {
           </Button>
         </DialogActions>
       </Dialog>
-      <FormDialog open={this.state.openProductDialog} handleClose={this.closeProductDialog} restaurantId={this.state.id}/>
+      
                                 </div>
                                 
                             </div>
