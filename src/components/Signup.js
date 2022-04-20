@@ -14,7 +14,6 @@ class Signup extends React.Component {
     this.state = {
       username: "",
       email: "",
-      phoneNumber: "",
       password: "",
       address:"",
       shouldAlertDisplay: false,
@@ -35,9 +34,9 @@ class Signup extends React.Component {
     this.setState({ email: e.target.value });
   };
 
-  handlePhoneNumberChange = (e) => {
-    this.setState({ phoneNumber: e.target.value });
-  };
+  // handlePhoneNumberChange = (e) => {
+  //   this.setState({ phoneNumber: e.target.value });
+  // };
 
   handlePasswordChange = (e) => {
     this.setState({ password: e.target.value });
@@ -48,33 +47,32 @@ class Signup extends React.Component {
   };
 
   handleSubmit = () => {
-    const { username, email, phoneNumber, password,address } = this.state;
+    const { username, email, password,address } = this.state;
     const {
       history: { push },
     } = this.props;
     if (
       username === "" ||
       email === "" ||
-      phoneNumber === "" ||
       password === "" || address=== ""
     ) {
       this.setState({ shouldAlertDisplay: true });
       return;
     }
     const isEmailError = this.checkEmailError(email);
-    const isPhoneError = this.checkPhoneError(phoneNumber);
+    // const isPhoneError = this.checkPhoneError(phoneNumber);
     if(!isEmailError){
       this.setState({isEmailError: true});
     }else{
       this.setState({isEmailError: false});
     }
-    if(!isPhoneError){
-      this.setState({isNumberError: true});
-    }else{
-      this.setState({isNumberError: false});
-    }
+    // if(!isPhoneError){
+    //   this.setState({isNumberError: true});
+    // }else{
+    //   this.setState({isNumberError: false});
+    // }
 
-    if(!isEmailError || !isPhoneError){
+    if(!isEmailError){
       return;
     }
 
@@ -82,21 +80,18 @@ class Signup extends React.Component {
      userName:username,
      password:password,
      email:email,
-     phone:phoneNumber,
      addressName: address
     }
    
     axios.post(eventBaseUrl,reqJson).then((res) => {
-      if(res.data.isRegistered)
-      {
-        push('/');
-      }
-      if(!res.data.isRegistered){
+      if(!res.data.isValidUser){
        this.setState({
         signupErrorMessage:res.data.error,
         shouldErrorMessageDisplay:true
        }) 
-      }
+      }else{
+        push('/');
+       }
     });
   };
 
@@ -112,7 +107,7 @@ class Signup extends React.Component {
 
 
   render() {
-    const { username,address, email, phoneNumber, password, shouldAlertDisplay,shouldErrorMessageDisplay,signupErrorMessage, isEmailError,isNumberError} =
+    const { username,address, email, password, shouldAlertDisplay,shouldErrorMessageDisplay,signupErrorMessage, isEmailError,isNumberError} =
       this.state;
       
     return (
@@ -143,7 +138,7 @@ class Signup extends React.Component {
           onChange={(e) => this.handleEmailChange(e)}
           helperText={isEmailError ?"Invalid Email":''}
         />
-        <TextField
+        {/* <TextField
           error={isNumberError}
           required
           id="outlined-phone"
@@ -151,7 +146,7 @@ class Signup extends React.Component {
           label="Phone Number"
           onChange={(e) => this.handlePhoneNumberChange(e)}
           helperText={isNumberError?"Invalid Phone Number":''}
-        />
+        /> */}
         <TextField
           required
           id="outlined-phone"
