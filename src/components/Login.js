@@ -46,13 +46,13 @@ class Login extends React.Component {
 
     }
     const reqJson={
-      username:username,password:password
+      userName:username,password:password
     }
     axios.post(eventBaseUrl,reqJson).then((res) => {
      if(res.data.isValidUser)
      {
-      //  localStorage.setItem("username",username)
-      //  localStorage.setItem("userId",res.data.userId)
+       localStorage.setItem("address",res.data.address)
+       localStorage.setItem("userId",res.data.userId)
       push({
         pathname: "/home",
         username: username, 

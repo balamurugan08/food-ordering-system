@@ -110,7 +110,7 @@ class Restaurants extends React.Component {
             <div className="flex flex-wrap ml-4">
             {this.state.list && this.state.list.map(
                 x => 
-                    <RestaurantCard thumbnail_image={x.image} name = {x.restaurantName} id={x.id} isAdmin={this.props.isAdmin ? true : false}/>
+                    <RestaurantCard thumbnail_image={x.image} name = {x.restaurantName} address={x.address} id={x.id} isAdmin={this.props.isAdmin ? true : false}/>
                     // cuisines = {x.cuisines} rating = {x.rating} reviews = {x.reviews}/>
                     
             )}

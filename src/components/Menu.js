@@ -32,9 +32,7 @@ class Menu extends React.Component{
            <div className="d-flex flex-column itemDescription">
                <div style={{display:'flex',flexDirection:'column',flexGrow:'1'}}>
                <div className="h5">{this.props.name}</div>
-               {/* <div>{colorCircle}{' '}{data.vegan}</div> */}
-               {/* <div>Descriprion</div> */}
-               <div className="py-2">&#8377;{this.props.price}</div>
+                <div className="py-2">&#36;{this.props.price}</div>
                </div>
                {!this.props.isAdmin && <div style={{display:'flex',alignItems:'center'}}><button className="addCartBtn" onClick={()=>this.props.action()}>Add to cart</button></div>}
               

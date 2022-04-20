@@ -86,7 +86,7 @@ class FormDialog extends React.Component {
         return (
             <div>
               <Dialog open={open} onClose={handleClose}  maxWidth="md">
-                <DialogTitle>{`${isRestaurant ? 'Add Restaurant': 'Add Product'} `}</DialogTitle>
+                <DialogTitle>{`${isRestaurant ? 'Add Restaurant': 'Add Item'} `}</DialogTitle>
                 <DialogContent>
                     {isRestaurant ? 
                            <React.Fragment>
@@ -131,7 +131,7 @@ class FormDialog extends React.Component {
                        autoFocus
                        margin="dense"
                        id="productName"
-                       label="Product Name"
+                       label="Item Name"
                        type="text"
                        fullWidth
                        variant="standard"
