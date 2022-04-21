@@ -9,6 +9,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import UserProfileDialog from './UserProfileDialog'
 
 
 const eventBaseUrl = "http://localhost:8080/foodApp/restaurant";
@@ -19,7 +20,8 @@ class Restaurants extends React.Component {
             // list: data
             list:[],
             openRestaurantDialog:false,
-            anchorEl:null
+            anchorEl:null,
+            openUserProfileDialog:false
         };
     }
 
@@ -87,6 +89,19 @@ class Restaurants extends React.Component {
     })
   };
 
+  handleProfile=()=>{
+    this.setState({
+        anchorEl:null,
+        openUserProfileDialog:true,
+    })
+  }
+
+  handleClose=()=>{
+    this.setState({
+        anchorEl:null,
+        openUserProfileDialog:false,
+    })
+  }
   
 
     render(){
@@ -108,8 +123,8 @@ class Restaurants extends React.Component {
       open={isMenuOpen}
       onClose={this.handleMenuClose}
     >
-      <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={this.handleMenuClose}>Orders</MenuItem>
+      <MenuItem onClick={this.handleProfile}>Profile</MenuItem>
+      {/* <MenuItem onClick={this.handleMenuClose}>Orders</MenuItem> */}
     </Menu>
   );
 
@@ -160,6 +175,7 @@ class Restaurants extends React.Component {
               <AccountCircle />
             </IconButton>
             {renderMenu}
+            <UserProfileDialog open={this.state.openUserProfileDialog} handleClose={this.handleClose}></UserProfileDialog>
             </div>
     }
                
