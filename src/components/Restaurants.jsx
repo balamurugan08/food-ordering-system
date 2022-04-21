@@ -5,6 +5,11 @@ import data from '../data/data.json'
 import RestaurantCard from '../components/RestaurantCard'
 import axios from "axios";
 import FormDialog from './FormDialog';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+
 
 const eventBaseUrl = "http://localhost:8080/foodApp/restaurant";
 class Restaurants extends React.Component {
@@ -13,7 +18,8 @@ class Restaurants extends React.Component {
         this.state={
             // list: data
             list:[],
-            openRestaurantDialog:false
+            openRestaurantDialog:false,
+            anchorEl:null
         };
     }
 
@@ -69,7 +75,46 @@ class Restaurants extends React.Component {
     console.log('res',this.state.list)
 }
 
+ handleProfileMenuOpen = (event) => {
+     this.setState({
+         anchorEl:event.currentTarget
+     })
+  };
+
+  handleMenuClose = () => {
+    this.setState({
+        anchorEl:null
+    })
+  };
+
+  
+
     render(){
+        const menuId = 'primary-search-account-menu';
+        const isMenuOpen = Boolean(this.state.anchorEl);
+  const renderMenu = (
+    <Menu
+      anchorEl={this.state.anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={this.handleMenuClose}
+    >
+      <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={this.handleMenuClose}>Orders</MenuItem>
+    </Menu>
+  );
+
+
+
         return(
         <div>
             {/* <div className="nav">
@@ -88,15 +133,36 @@ class Restaurants extends React.Component {
             <div className="maincart">
 
             <div id="menubar" className="bg-blue-600">
-                <h2 className="text-4xl font-semibold text-white">Choose Your Favourite One</h2>
-                <p id ="sort">  Sort by &nbsp; &nbsp;
+                <h2 style={{display:'flex',flexGrow:'1'}}className="text-4xl font-semibold text-white">Choose Your Favourite One</h2>
+                <p style={{marginRight:20}} id ="sort">  Sort by &nbsp; &nbsp;
                     <select id="sort-metrics" defaultValue={"none"} onChange={(e) => this.sortMenu(e)}>
                         <option value="none" disabled hidden>None</option>
                         <option class="sort-option" value="name">Name</option>
                         {/* <option class="sort-option" value="rating">Ratings</option>
                         <option class="sort-option" value="review">Reviews</option> */}
                     </select>
+                   
+                    
+
                 </p>
+                {!this.props.isAdmin &&
+                <div>
+                    <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={this.handleProfileMenuOpen}
+              color="inherit"
+              style={{color:'white',marginRight:8}}
+            >
+              <AccountCircle />
+            </IconButton>
+            {renderMenu}
+            </div>
+    }
+               
             </div>
             <div className="self-end">
             {this.props.isAdmin && <button
@@ -110,7 +176,7 @@ class Restaurants extends React.Component {
             <div className="flex flex-wrap ml-4">
             {this.state.list && this.state.list.map(
                 x => 
-                    <RestaurantCard thumbnail_image={x.image} name = {x.restaurantName} id={x.id} isAdmin={this.props.isAdmin ? true : false}/>
+                    <RestaurantCard thumbnail_image={x.image} name = {x.restaurantName} address={x.address} id={x.id} isAdmin={this.props.isAdmin ? true : false}/>
                     // cuisines = {x.cuisines} rating = {x.rating} reviews = {x.reviews}/>
                     
             )}

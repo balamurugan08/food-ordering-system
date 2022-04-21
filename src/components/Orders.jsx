@@ -110,13 +110,19 @@ class Orders extends React.Component {
     // }
 
     handlePayment = ()=>{
-        const {
-            history: { push },
-          } = this.props;
-
-          push({
-            pathname: "/payment",
-          });
+        let baseUrl = "http://localhost:8080/foodApp/user/order";
+        const reqJson={
+            userId:localStorage.getItem("userId"),
+            address:localStorage.getItem("address"),
+            products:this.state.cartList,
+            price:this.state.total,
+            payment:{},
+            orderType:'online',
+            orderTracking:{},
+          }
+        axios.post(baseUrl,reqJson).then((res) => {
+           console.log('response',res);
+    })
     }
 
     handleClose = ()=>{
@@ -200,7 +206,7 @@ class Orders extends React.Component {
           </button>
                     {isAdmin && <button
             class="bg-white  text-blue-700 font-bold py-2 px-4 rounded mr-2 mt-2"
-            onClick={this.handleProductDialog}>Add Products</button>}
+            onClick={this.handleProductDialog}>Add Items</button>}
           <button
             class="bg-white text-blue-700 font-bold py-2 px-4 rounded mr-2 mt-2"
             onClick={this.handleLogout}
@@ -213,7 +219,7 @@ class Orders extends React.Component {
                         <br/>
                         <div className='menuDetails'>
                         {this.state.newList.map (
-                        item => <Menu id = {item.id} price={item.price} name={item.productName} action={(e)=>this.childHandler(item)} isAdmin={isAdmin}/>) }
+                        item => <Menu id = {item.id} price={item.price} image={item.image} name={item.productName} action={(e)=>this.childHandler(item)} isAdmin={isAdmin}/>) }
                         </div>
                     </div>
                 </div>
