@@ -69,12 +69,15 @@ class Restaurants extends React.Component {
     }
 
     componentWillMount(){
-        axios.get(eventBaseUrl).then((res) => {
-            this.setState({
-                list:res.data.restaurants
-            })
-    })
-    console.log('res',this.state.list)
+      this.getAllRestaurants();
+}
+
+getAllRestaurants = ()=>{
+    axios.get(eventBaseUrl).then((res) => {
+        this.setState({
+            list:res.data.restaurants
+        })
+})
 }
 
  handleProfileMenuOpen = (event) => {
@@ -188,7 +191,7 @@ class Restaurants extends React.Component {
             class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
             onClick={this.props.handleLogout}>Logout</button>
             </div>
-            <FormDialog open={this.state.openRestaurantDialog} handleClose={this.closeRestaurantDialog} isRestaurant/>
+            <FormDialog open={this.state.openRestaurantDialog} updateRestaurants={this.getAllRestaurants} handleClose={this.closeRestaurantDialog} isRestaurant/>
             <div className="flex flex-wrap ml-4">
             {this.state.list && this.state.list.map(
                 x => 

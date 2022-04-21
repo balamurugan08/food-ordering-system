@@ -36,12 +36,11 @@ class Orders extends React.Component {
     }
 
     componentWillMount(){
-        // const restaurantId = this.props.history.location.pathname.slice(7)
-        // const List = this.state.list.filter(function (rec) { return rec.name === hotel})
-        // this.setState({
-        //     id:restaurantId,
-        //     newList: List
-        // })
+        
+      this.getProductList();
+    }
+
+    getProductList=()=>{
         let value = this.props.history.location.pathname.split('/');
         const restaurantId = value[2]
         let url = eventBaseUrl + '/'+restaurantId + '/products';
@@ -160,7 +159,7 @@ class Orders extends React.Component {
         
         return(
         <div>
-            <FormDialog open={openProductDialog} handleClose={this.closeProductDialog} restaurantId={id}/>
+            <FormDialog updateProducts={this.getProductList} open={openProductDialog} handleClose={this.closeProductDialog} restaurantId={id}/>
             {/* <div className="nav">
                 <div id="logo">
                     <h2>FOOD ORDERING SYSTEM</h2>

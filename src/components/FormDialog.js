@@ -62,6 +62,7 @@ class FormDialog extends React.Component {
                 console.log(res);
                 this.setState({restaurantName: "",imageUrl: "",locationName: ""})
                 this.props.handleClose();
+                this.props.updateRestaurants();
                });
 
         }else{
@@ -75,6 +76,7 @@ class FormDialog extends React.Component {
                 console.log(res);
                 this.setState({productName: "",productImageUrl: "",productPrice: ""})
                 this.props.handleClose();
+                this.props.updateProducts();
                });
 
         }
