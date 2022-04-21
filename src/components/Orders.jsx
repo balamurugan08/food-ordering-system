@@ -155,7 +155,7 @@ class Orders extends React.Component {
     render(){
         let value = this.props.history.location.pathname.split('/');
         let isDisplayPayment = this.state.total>0;
-        const {openProductDialog,id,isAdmin} = this.state;
+        const {openProductDialog,id,isAdmin,cartList,total} = this.state;
 
         
         return(
@@ -246,7 +246,7 @@ class Orders extends React.Component {
                                 <div style={{display:'flex',justifyContent:'center'}}>
                                { isDisplayPayment &&
                                         <Link to={{
-                                            pathname:`/payment/${id}/${isAdmin}`}}>
+                                            pathname:`/payment/${id}/${isAdmin}`,state:{cartList:cartList,total:total}}}>
                                 <input  id="pay" type="button" value="Pay Now"/>
                                 </Link>}
                                

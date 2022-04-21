@@ -75,18 +75,20 @@ handleClose = ()=>{
 handlePayment = (orderType)=>{
 
   let baseUrl = "http://localhost:8080/foodApp/user/order";
+  const location = this.props.location;
+  const { cartList,total } = location.state;
   const reqJson={
       userId:localStorage.getItem("userId"),
       address:localStorage.getItem("address"),
-      products:this.state.cartList,
-      price:this.state.total,
+      products:cartList,
+      price:total,
       payment:{card:this.state.cardNo,cvv:this.state.cvv},
       orderType:orderType,
       orderTracking:{},
     }
  
     this.setState({
-      open:false,
+      open:true,
       card:"",
       cvv:""
 
