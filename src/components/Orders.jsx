@@ -109,21 +109,7 @@ class Orders extends React.Component {
     //     })
     // }
 
-    handlePayment = ()=>{
-        let baseUrl = "http://localhost:8080/foodApp/user/order";
-        const reqJson={
-            userId:localStorage.getItem("userId"),
-            address:localStorage.getItem("address"),
-            products:this.state.cartList,
-            price:this.state.total,
-            payment:{},
-            orderType:'online',
-            orderTracking:{},
-          }
-        axios.post(baseUrl,reqJson).then((res) => {
-           console.log('response',res);
-    })
-    }
+
 
     handleClose = ()=>{
         const {
@@ -261,7 +247,7 @@ class Orders extends React.Component {
                                { isDisplayPayment &&
                                         <Link to={{
                                             pathname:`/payment/${id}/${isAdmin}`}}>
-                                <input  id="pay" type="button" value="Pay Now" onClick={this.handlePayment}/>
+                                <input  id="pay" type="button" value="Pay Now"/>
                                 </Link>}
                                
       <Dialog

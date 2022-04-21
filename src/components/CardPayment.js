@@ -48,7 +48,7 @@ class CardPayment extends React.Component {
             <div class="mb-3">
                 <label class="font-bold text-sm mb-2 ml-1">Card number</label>
                 <div>
-                    <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-blue-500 transition-colors" placeholder="0000 0000 0000 0000" type="text"/>
+                    <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-blue-500 transition-colors" placeholder="0000 0000 0000 0000" type="number" onChange={e=>this.props.handleCardNumberChange(e)}/>
                 </div>
             </div>
             <div class="mb-3 -mx-2 flex items-end">
@@ -89,11 +89,11 @@ class CardPayment extends React.Component {
             <div class="mb-10">
                 <label class="font-bold text-sm mb-2 ml-1">Security code</label>
                 <div>
-                    <input class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-blue-500 transition-colors" placeholder="000" type="text"/>
+                    <input class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-blue-500 transition-colors" placeholder="000" type="number" onChange={e=>this.props.handleCvvChange(e)}/>
                 </div>
             </div>
             <div>
-                <button class="block w-full max-w-xs mx-auto bg-blue-700 hover:bg-blue-800 focus:bg-blue-500 text-white rounded-lg px-3 py-3 font-semibold" onClick={this.props.handlePayment}><i class="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
+                <button class="block w-full max-w-xs mx-auto bg-blue-700 hover:bg-blue-800 focus:bg-blue-500 text-white rounded-lg px-3 py-3 font-semibold" onClick={()=>this.props.handlePayment("Online")}><i class="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
             </div>
         </div>
     );
