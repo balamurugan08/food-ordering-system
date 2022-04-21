@@ -237,7 +237,7 @@ class Orders extends React.Component {
     
                             <div id="total">
                                 <p id="total"> Total amount: 
-                                    <span className="spn">{'\u20B9'}  {this.state.total}</span>
+                                    <span className="spn">&#36;{this.state.total}</span>
                                 </p>
                                 {/* <input id="pay" type="button" value="Calculate"
                                 onClick = {() => this.total(this.state.price,this.state.quantity)} /> */}

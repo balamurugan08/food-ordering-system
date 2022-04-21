@@ -127,7 +127,7 @@ handlePayment = (orderType)=>{
           <p className="text-2xl font-semibold">Cash On Delivery</p>
         </AccordionSummary>
         <AccordionDetails>
-        <button class="block w-full max-w-xs mx-auto bg-blue-700 hover:bg-blue-800 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold" onClick={()=>this.handlePayment("COD")}><i class="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
+        <button class="block w-full max-w-xs mx-auto bg-blue-700 hover:bg-blue-800 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold" onClick={()=>this.handlePayment("COD")}><i class="mdi mdi-lock-outline mr-1"></i> PAY ON DELIVERY</button>
         </AccordionDetails>
       </Accordion>
 
