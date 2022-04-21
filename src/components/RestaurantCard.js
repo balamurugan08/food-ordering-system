@@ -22,7 +22,7 @@ class RestaurantCard extends React.Component{
     {/* <a href="#"> */}
         <img class="rounded-t-lg object-cover" src={this.props.thumbnail_image} alt="Food Image" style={{maxWidth:'200px',minHeight:'150px',maxHeight:'150px',minWidth:'200px'}}/>
     {/* </a> */}
-    <div class="p-5">
+    <div class="p-5 text-center">
     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{this.props.name}</h5>
         {/* <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p> */}
            <Link to={{

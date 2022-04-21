@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import Signup from "./components/Signup";
 import Orders from "./components/Orders";
 import AdminMain from "./components/AdminMain";
+import Payment from "./components/Payment";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" component={Main}></Route>
         <Route path="/admin" component={AdminMain}></Route>
         <Route exact path="/order/:id/:name/:isAdmin" component={Orders}></Route>
+        <Route exact path="/payment/:id/:isAdmin" component={Payment}></Route>
       </div>
     </BrowserRouter>
   );

@@ -11,6 +11,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import FormDialog from './FormDialog';
+import {Link} from 'react-router-dom';
 
 
 const eventBaseUrl = "http://localhost:8080/foodApp/restaurant";
@@ -102,10 +103,20 @@ class Orders extends React.Component {
         })
     };
 
+    // handlePayment = ()=>{
+    //     this.setState({
+    //         open:true
+    //     })
+    // }
+
     handlePayment = ()=>{
-        this.setState({
-            open:true
-        })
+        const {
+            history: { push },
+          } = this.props;
+
+          push({
+            pathname: "/payment",
+          });
     }
 
     handleClose = ()=>{
@@ -242,7 +253,10 @@ class Orders extends React.Component {
                                 <br/>
                                 <div style={{display:'flex',justifyContent:'center'}}>
                                { isDisplayPayment &&
-                                <input  id="pay" type="button" value="Pay Now" onClick={this.handlePayment}/>}
+                                        <Link to={{
+                                            pathname:`/payment/${id}/${isAdmin}`}}>
+                                <input  id="pay" type="button" value="Pay Now" onClick={this.handlePayment}/>
+                                </Link>}
                                
       <Dialog
         open={this.state.open}
