@@ -23,7 +23,8 @@ class Restaurants extends React.Component {
             openRestaurantDialog:false,
             anchorEl:null,
             openUserProfileDialog:false,
-            openOrderDialog:false
+            openOrderDialog:false,
+            orderDetails:{}
         };
     }
 
@@ -71,9 +72,16 @@ class Restaurants extends React.Component {
     }
 
     openOrderDialog = () =>{
-        this.setState({
-            openOrderDialog:true
+        const orderUrl = `http://localhost:8080/foodApp/user/${localStorage.getItem("userId")}/order`;
+
+        axios.get(orderUrl).then((res) => {
+            console.log(res)
+
+             this.setState({
+                openOrderDialog:true,
+                orderDetails:res.data.orders[res.data.orders.length - 1 ]
         })
+    })
     }
 
     closeOrderDialog = () =>{
@@ -209,7 +217,7 @@ getAllRestaurants = ()=>{
             onClick={this.props.handleLogout}>Logout</button>
             </div>
             <FormDialog open={this.state.openRestaurantDialog} updateRestaurants={this.getAllRestaurants} handleClose={this.closeRestaurantDialog} isRestaurant/>
-            <OrderDialog open={this.state.openOrderDialog} handleClose={this.closeOrderDialog}/>
+            {this.state.openOrderDialog && <OrderDialog open={this.state.openOrderDialog} handleClose={this.closeOrderDialog} orderDetails={this.state.orderDetails}/>}
 
             <div className="flex flex-wrap ml-4">
             {this.state.list && this.state.list.map(
