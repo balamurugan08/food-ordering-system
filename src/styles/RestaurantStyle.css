@@ -113,3 +113,7 @@ div.cart  p:hover {
     word-break: break-all;
 }
 
+#alert-dialog-title{
+	font-weight: 600 !important;
+}
+
